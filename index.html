@@ -1,37 +1,114 @@
 <!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="ru"> <!--<![endif]-->
+<html class="no-js" lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>index msoap github home page</title>
-  <meta name="description" content="msoap github home page">
-  <meta name="viewport" content="width=device-width">
+  <title>&mu;soap index page</title>
+  <meta name="description" content="msoap index/home page">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css">
+  <link href='//fonts.googleapis.com/css?family=Ubuntu:700,400&subset=latin,cyrillic,latin-ext' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/libs/modernizr-2.5.3.min.js"></script>
+
+  <link rel="apple-touch-icon" href="img/touch-icon-iphone.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="img/touch-icon-iphone4.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="img/touch-icon-ipad.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="img/touch-icon-ipad-new.png">
+  <link rel="shortcut icon" href="favicon.png">
 </head>
 <body>
 
-  <header>
+    <div id="top">
+        <a name="top"></a>
+    </div>
 
-  </header>
+    <div class="navbar navbar-fixed-top" id="navbar">
+      <a name="navbar"></a>
+      <div class="navbar-inner">
+        <div class="container">
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#delicious">del.icio.us</a></li>
+              <li><a href="#github">github.com</a></li>
+              <li><a href="#lastfm">last.fm</a></li>
+              <li><a href="#fotkiyandexru">photos</a></li>
+              <li><a href="#twitter">twitter</a></li>
+              <li><a href="#linkedin">linked.in</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
 
-  <div role="main">
-    <h1>Index</h1>
-    <img src="img/avatar.png" alt="avatar"> Hello World!
-  </div>
-  <footer>
+    <div class="container">
+        <header class="jumbotron subhead" id="overview">
+            <img src="img/avatar.png" alt="avatar">
+            <div class="top-header-texts">
+                <h1>MSOAP index page</h1>
+                <p class="lead">all recent changes.</p>
+            </div>
+        </header>
 
-  </footer>
+        <div id="github">
+            <a name="github"></a>
+            <h2>github.com</h2>
+        </div>
 
-  <script src="js/libs/jquery-1.7.1.min.js"></script>
+        <div id="delicious">
+            <a name="delicious"></a>
+            <h2>del.ucio.us</h2>
+        </div>
 
-  <!-- scripts concatenated and minified via build script -->
-  <script src="js/plugins.js"></script>
-  <script src="js/script.js"></script>
-  <!-- end scripts -->
+        <div id="lastfm">
+            <a name="lastfm"></a>
+            <h2>last.fm</h2>
+        </div>
+
+        <div id="fotkiyandexru">
+            <a name="fotkiyandexru"></a>
+            <h2>photos</h2>
+        </div>
+
+        <div id="twitter">
+            <a name="twitter"></a>
+            <h2>twitter</h2>
+        </div>
+
+        <div id="linkedin">
+            <a name="linkedin"></a>
+            <h2>linked.in</h2>
+            <div id="linkedin_div"></div>
+        </div>
+
+    </div> <!-- /container -->
+
+    <hr>
+
+    <footer>
+    <p>&copy; 2012</p>
+    </footer>
+
+    <script src="js/libs/ecmascript5.compatibility.min.js"></script>
+    <script src="//yandex.st/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//yandex.st/jquery/tmpl/1.0.0pre/jquery.tmpl.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <!-- Templates -->
+    <script id="tmpl_links_block" type="text/x-jquery-tmpl">
+        <span class="service_title">${name}</span>
+        <ul>
+            {{each(i, item) items}}
+                {{if without_url}}
+                    <li title="${item.description}"><a href="${item.url}">${item.title}</a> <span class="item_data">${item.date}</span></li>
+                {{else}}
+                    <li title="${item.description}">${item.title}. <a href="${item.url}">${item.url}</a> <span class="item_data">${item.date}</span></li>
+                {{/if}}
+            {{/each}}
+            <a href="${link_to_all}">All items&hellip;</a>
+        </ul>
+    </script>
 
 <!-- Yandex.Metrika counter -->
 <div style="display:none;"><script type="text/javascript">
