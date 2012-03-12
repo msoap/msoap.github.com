@@ -39,18 +39,20 @@ var App = {
         // http://developer.github.com/v3/
         // https://api.github.com/users/msoap/events
         $.getJSON("https://api.github.com/users/msoap/repos?callback=?", {
-            "format": "json",
+            "format": "json"
         }, function(github_data) {
 
             var vars = {
                 name: 'Github repositories:',
                 link_to_all: 'http://github.com/msoap',
-                items: github_data.data.map(function(i) {return {
-                    title: i.description,
-                    description: i.description,
-                    url: i.html_url,
-                    date: new Date(i.updated_at).toLocaleDateString()
-                }}),
+                items: github_data.data.map(function(i) {
+                    return {
+                        title: i.description,
+                        description: i.description,
+                        url: i.html_url,
+                        date: new Date(i.updated_at).toLocaleDateString()
+                    };
+                })
             };
 
             App.render_any('div#github', vars);
@@ -65,12 +67,14 @@ var App = {
             var vars = {
                 name: 'Last delicious links:',
                 link_to_all: 'http://delicious.com/msoap',
-                items: delicious_data.map(function(i) {return {
-                    title: i.d,
-                    description: i.n,
-                    url: i.u,
-                    date: new Date(i.dt).toLocaleDateString()
-                }}),
+                items: delicious_data.map(function(i) {
+                    return {
+                        title: i.d,
+                        description: i.n,
+                        url: i.u,
+                        date: new Date(i.dt).toLocaleDateString()
+                    };
+                })
             };
 
             App.render_any('div#delicious', vars);
@@ -90,12 +94,14 @@ var App = {
                 without_url: true,
                 name: 'Recently Listened Tracks:',
                 link_to_all: 'http://www.lastfm.ru/user/msoap',
-                items: lastfm_data.recenttracks.track.map(function(i) {return {
-                    title: i.name,
-                    description: [i.artist["#text"], i.album["#text"]].join(" / "),
-                    url: i.url,
-                    date: new Date(i.date.uts * 1000).toLocaleDateString()
-                }}),
+                items: lastfm_data.recenttracks.track.map(function(i) {
+                    return {
+                        title: i.name,
+                        description: [i.artist["#text"], i.album["#text"]].join(" / "),
+                        url: i.url,
+                        date: new Date(i.date.uts * 1000).toLocaleDateString()
+                    };
+                })
             };
 
             App.render_any('div#lastfm', vars);
@@ -106,21 +112,23 @@ var App = {
         // http://api.yandex.ru/fotki/doc/operations-ref/all-photos-collection-get.xml
         $.getJSON("http://api-fotki.yandex.ru/api/users/msoap/photos/?callback=?", {
             "limit": 10,
-            "format": "json",
+            "format": "json"
         }, function(yaphotki_data) {
 
             var vars = {
                 without_url: true,
                 name: 'Last photos:',
                 link_to_all: 'http://fotki.yandex.ru/users/msoap/',
-                items: yaphotki_data.entries
-                       .filter(function(e, i) {return i < 15 ? true : false})
-                       .map(function(i) {return {
-                            title: i.title,
-                            description: i.description,
-                            url: i.links.alternate,
-                            date: new Date(i.published).toLocaleDateString()
-                }}),
+                items: yaphotki_data.entries.filter(function(e, i) {
+                    return i < 15 ? true : false;
+                }).map(function(i) {
+                    return {
+                        title: i.title,
+                        description: i.description,
+                        url: i.links.alternate,
+                        date: new Date(i.published).toLocaleDateString()
+                    };
+               })
             };
 
             App.render_any('div#fotkiyandexru', vars);
@@ -140,13 +148,14 @@ var App = {
                 without_url: true,
                 name: 'Last twits, one twit per year:)',
                 link_to_all: 'http://twitter.com/msoap',
-                items: twitter_data
-                       .map(function(i) {return {
-                            title: i.text,
-                            description: '',
-                            url: "http://twitter.com/#!/msoap/status/" + i.id_str,
-                            date: new Date(i.created_at).toLocaleDateString()
-                }}),
+                items: twitter_data.map(function(i) {
+                    return {
+                        title: i.text,
+                        description: '',
+                        url: "http://twitter.com/#!/msoap/status/" + i.id_str,
+                        date: new Date(i.created_at).toLocaleDateString()
+                    };
+                })
             };
 
             App.render_any('div#twitter', vars);
@@ -156,12 +165,12 @@ var App = {
     on_init_render_linkedin: function() {
         // add Linkedin button
         $('div#linkedin_div').append(
-            '<script src="http://platform.linkedin.com/in.js" type="text/javascript"></script>'
-            + '<script type="IN/MemberProfile" data-id="http://www.linkedin.com/in/mudrik" data-format="click" data-related="false"></script>'
+            '<script src="http://platform.linkedin.com/in.js" type="text/javascript"></script>' +
+            '<script type="IN/MemberProfile" data-id="http://www.linkedin.com/in/mudrik" data-format="click" data-related="false"></script>'
         );
 
         $("div#linkedin_div").one("mouseenter mouseleave", function() {
-            $("span.IN-widget a.li-connect-link").append('<span style="color: black; font-size: 70%; text-decoration: none;">Linkedin<span>')
+            $("span.IN-widget a.li-connect-link").append('<span style="color: black; font-size: 70%; text-decoration: none;">Linkedin<span>');
             $(this).unbind('mouseenter mouseleave');
         });
     },
