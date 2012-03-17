@@ -99,7 +99,7 @@ var App = {
                         title: i.name,
                         description: [i.artist["#text"], i.album["#text"]].join(" / "),
                         url: i.url,
-                        date: new Date(i.date.uts * 1000).toLocaleDateString()
+                        date: i['date'] ? new Date(i.date.uts * 1000).toLocaleDateString() : new Date().toLocaleDateString()
                     };
                 })
             };
