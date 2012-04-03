@@ -51,7 +51,7 @@ var App = {
                     if (i.homepage.length) {
                         urls.push({title: "home", url: i.homepage})
                     };
-                    urls.push({title: "repo", url: i.html_url});
+                    urls.push({title: "repository", url: i.html_url});
                     if (i.has_wiki) {
                         urls.push({title: "wiki", url: i.html_url + '/wiki'})
                     };
