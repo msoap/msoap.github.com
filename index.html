@@ -109,6 +109,24 @@
             <a href="${link_to_all}">All items&hellip;</a>
         </ul>
     </script>
+    <script id="tmpl_links_block_github" type="text/x-jquery-tmpl">
+        <span class="service_title">${name}</span>
+        <ul>
+            {{each(i, item) items}}
+                <li title="${item.description}">
+                    ${item.title}.
+                    ({{each(j, url_item) item.urls}}
+                        <a href="${url_item.url}">${url_item.title}</a>
+                        {{if j < item.urls.length - 1}}
+                        /
+                        {{/if}}
+                    {{/each}})
+                    <span class="item_data">${item.date}</span>
+                </li>
+            {{/each}}
+            <a href="${link_to_all}">All items&hellip;</a>
+        </ul>
+    </script>
 
 <!-- Yandex.Metrika counter -->
 <div style="display:none;"><script type="text/javascript">

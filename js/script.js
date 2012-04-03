@@ -46,16 +46,26 @@ var App = {
                 name: 'Github repositories:',
                 link_to_all: 'http://github.com/msoap',
                 items: github_data.data.map(function(i) {
+
+                    var urls = [];
+                    if (i.homepage.length) {
+                        urls.push({title: "home", url: i.homepage})
+                    };
+                    urls.push({title: "repo", url: i.html_url});
+                    if (i.has_wiki) {
+                        urls.push({title: "wiki", url: i.html_url + '/wiki'})
+                    };
+
                     return {
                         title: i.description,
                         description: i.description,
-                        url: i.html_url,
+                        urls: urls,
                         date: new Date(i.updated_at).toLocaleDateString()
                     };
                 })
             };
 
-            App.render_any('div#github', vars);
+            App.render_any('div#github', vars, "script#tmpl_links_block_github");
         });
     },
 
@@ -176,7 +186,9 @@ var App = {
     },
 
     // -------- render any block ---------
-    render_any: function(where_selector, vars) {
-        $("script#tmpl_links_block").tmpl(vars).appendTo(where_selector);
+    render_any: function(where_selector, vars, template) {
+        if (! template)
+            template = "script#tmpl_links_block";
+        $(template).tmpl(vars).appendTo(where_selector);
     }
 };
