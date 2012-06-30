@@ -48,7 +48,7 @@ var App = {
                 items: github_data.data.map(function(i) {
 
                     var urls = [];
-                    if (i.homepage.length) {
+                    if (i.homepage && i.homepage.length) {
                         urls.push({title: "home", url: i.homepage})
                     };
                     urls.push({title: "repository", url: i.html_url});
