@@ -15,6 +15,7 @@ var App = {
         // render
         App.on_init_render_github();
         App.on_init_render_delicious();
+        App.on_init_render_github_gists();
         App.on_init_render_lastfm();
         App.on_init_render_fotkiyandexru();
         App.on_init_render_twitter();
@@ -44,7 +45,7 @@ var App = {
 
             var vars = {
                 name: 'Github repositories:',
-                link_to_all: 'http://github.com/msoap',
+                link_to_all: 'https://github.com/msoap',
                 items: github_data.data.map(function(i) {
 
                     var urls = [];
@@ -66,6 +67,35 @@ var App = {
             };
 
             App.render_any('div#github', vars, "script#tmpl_links_block_github");
+        });
+    },
+
+    on_init_render_github_gists: function() {
+        // http://developer.github.com/v3/gists/
+        // https://api.github.com/users/msoap/gists
+        $.getJSON("https://api.github.com/users/msoap/gists?callback=?", {
+            "format": "json"
+        }, function(github_gists_data) {
+
+            var vars = {
+                name: 'Github gists:',
+                link_to_all: 'https://gist.github.com/msoap',
+                items: github_gists_data.data.map(function(i) {
+                    var file_name = i.description;
+                    for (var key in i.files) {
+                        file_name = key + " — " + i.description;
+                        break;
+                    }
+                    return {
+                        title: file_name,
+                        description: i.description,
+                        url: i.html_url,
+                        date: new Date(i.updated_at).toLocaleDateString()
+                    };
+                })
+            };
+
+            App.render_any('div#github', vars);
         });
     },
 
