@@ -47,6 +47,11 @@ var App = {
             "format": "json"
         }, function(github_data) {
 
+            if (github_data.meta && github_data.meta.status != 200) {
+                $("div#github").remove()
+                return;
+            };
+
             var vars = {
                 name: 'Github repositories:',
                 link_to_all: 'https://github.com/msoap',
@@ -80,6 +85,11 @@ var App = {
         $.getJSON("https://api.github.com/users/msoap/gists?callback=?", {
             "format": "json"
         }, function(github_gists_data) {
+
+            if (github_gists_data.meta && github_gists_data.meta.status != 200) {
+                $("div#github").remove()
+                return;
+            };
 
             var vars = {
                 name: 'Github gists:',
