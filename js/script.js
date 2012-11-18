@@ -1,4 +1,3 @@
-// ★★★★☆
 "use strict";
 
 $(function() {
@@ -20,6 +19,11 @@ var App = {
         App.on_init_render_fotkiyandexru();
         App.on_init_render_twitter();
         App.on_init_render_linkedin();
+
+        // svg fallback
+        if (! window.SVGSVGElement) {
+            $('img#avatar')[0].src = 'img/avatar.png'
+        };
     },
 
     on_init_set_active: function() {
