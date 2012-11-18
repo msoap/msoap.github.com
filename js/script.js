@@ -24,6 +24,13 @@ var App = {
         if (! window.SVGSVGElement) {
             $('img#avatar')[0].src = 'img/avatar.png'
         };
+
+        // update year
+        var date = new Date
+          , year = date.getFullYear();
+        if (year > 2000) {
+            $('p#copyright').html("&copy; " + year);
+        };
     },
 
     on_init_set_active: function() {
