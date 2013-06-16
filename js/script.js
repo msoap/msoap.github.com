@@ -17,7 +17,7 @@ var App = {
         App.on_init_render_github_gists();
         App.on_init_render_lastfm();
         App.on_init_render_fotkiyandexru();
-        App.on_init_render_twitter();
+        // App.on_init_render_twitter();
         App.on_init_render_linkedin();
 
         // svg fallback
