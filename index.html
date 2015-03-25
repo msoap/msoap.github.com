@@ -89,9 +89,9 @@
     <p id="copyright">&copy; 2012</p>
     </footer>
 
+    <script src="//yastatic.net/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//yastatic.net/jquery/tmpl/1.0.0pre/jquery.tmpl.min.js"></script>
     <script src="js/libs/ecmascript5.compatibility.min.js"></script>
-    <script src="//yandex.st/jquery/1.8.2/jquery.min.js"></script>
-    <script src="//yandex.st/jquery/tmpl/1.0.0pre/jquery.tmpl.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/script.min.js"></script>
 
@@ -110,18 +110,22 @@
         </ul>
     </script>
     <script id="tmpl_links_block_github" type="text/x-jquery-tmpl">
-        <span class="service_title">${name}</span>
         <ul>
             {{each(i, item) items}}
-                <li title="${item.description}">
+                <li title="${item.description}" class="github_item">
                     ${item.title}.
-                    ({{each(j, url_item) item.urls}}
+                    <br/>
+                    <span class="github_item_second_line">
+                    {{each(j, url_item) item.urls}}
                         <a href="${url_item.url}">${url_item.title}</a>
                         {{if j < item.urls.length - 1}}
-                        /
+                        ,
                         {{/if}}
-                    {{/each}})
-                    <span class="item_data">${item.date}</span>
+                    {{/each}},
+                    ★ – ${item.stargazers_count},
+                    language – ${item.language},
+                    <span class="item_github_date">${item.date}</span>
+                    </span>
                 </li>
             {{/each}}
             <a href="${link_to_all}">All items&hellip;</a>

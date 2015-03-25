@@ -34,6 +34,18 @@ span.item_data {
     font-size: 70%;
 }
 
+span.item_github_date {
+    color: #aaa;
+}
+
+.github_item {
+    padding-bottom: 10px;
+}
+
+.github_item_second_line {
+    font-size: 80%;
+}
+
 a:visited {
     color: #a36d9b;
 }

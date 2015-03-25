@@ -17,7 +17,6 @@ var App = {
         App.on_init_render_github_gists();
         App.on_init_render_lastfm();
         App.on_init_render_fotkiyandexru();
-        // App.on_init_render_twitter();
         App.on_init_render_linkedin();
 
         // svg fallback
@@ -59,27 +58,43 @@ var App = {
                 return;
             };
 
+            var items = github_data.data.map(function(i) {
+                var urls = [];
+                if (i.homepage && i.homepage.length) {
+                    urls.push({title: "home", url: i.homepage})
+                };
+                urls.push({title: "repository", url: i.html_url});
+                if (i.has_wiki) {
+                    urls.push({title: "wiki", url: i.html_url + '/wiki'})
+                };
+
+                return {
+                    title: i.description,
+                    description: i.description,
+                    urls: urls,
+                    date: new Date(i.updated_at).toLocaleDateString(),
+                    stargazers_count: i.stargazers_count,
+                    language: i.language,
+                    date_raw: i.updated_at,
+                };
+            });
+
+            // with stars and newest - first
+            items.sort(function(a, b) {
+                var by_stars = b.stargazers_count - a.stargazers_count
+                if (by_stars != 0) {
+                    return by_stars;
+                }
+                return a.date_raw > b.date_raw
+                       ? -1
+                       : a.date_raw < b.date_raw
+                         ? 1
+                         : 0
+            });
+
             var vars = {
-                name: 'Github repositories:',
                 link_to_all: 'https://github.com/msoap',
-                items: github_data.data.map(function(i) {
-
-                    var urls = [];
-                    if (i.homepage && i.homepage.length) {
-                        urls.push({title: "home", url: i.homepage})
-                    };
-                    urls.push({title: "repository", url: i.html_url});
-                    if (i.has_wiki) {
-                        urls.push({title: "wiki", url: i.html_url + '/wiki'})
-                    };
-
-                    return {
-                        title: i.description,
-                        description: i.description,
-                        urls: urls,
-                        date: new Date(i.updated_at).toLocaleDateString()
-                    };
-                })
+                items: items
             };
 
             App.render_any('div#github', vars, "script#tmpl_links_block_github");
@@ -193,33 +208,6 @@ var App = {
             };
 
             App.render_any('div#fotkiyandexru', vars);
-        });
-    },
-
-    on_init_render_twitter: function() {
-        // https://dev.twitter.com/docs/api/1/get/statuses/user_timeline
-        $.getJSON("https://api.twitter.com/1/statuses/user_timeline.json?callback=?", {
-            "include_entities": "false",
-            "include_rts": "false",
-            "screen_name": "msoap",
-            "count": 10
-        }, function(twitter_data) {
-
-            var vars = {
-                without_url: true,
-                name: 'Last twits, one twit per year:)',
-                link_to_all: 'http://twitter.com/msoap',
-                items: twitter_data.map(function(i) {
-                    return {
-                        title: i.text,
-                        description: '',
-                        url: "http://twitter.com/#!/msoap/status/" + i.id_str,
-                        date: new Date(i.created_at).toLocaleDateString()
-                    };
-                })
-            };
-
-            App.render_any('div#twitter', vars);
         });
     },
 
