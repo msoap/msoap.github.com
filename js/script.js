@@ -16,7 +16,6 @@ var App = {
         App.on_init_render_delicious();
         App.on_init_render_github_gists();
         App.on_init_render_lastfm();
-        App.on_init_render_fotkiyandexru();
         App.on_init_render_linkedin();
 
         // svg fallback
@@ -137,12 +136,12 @@ var App = {
 
     on_init_render_delicious: function() {
         // http://delicious.com/developers
-        $.getJSON("http://feeds.delicious.com/v2/json/msoap?callback=?", {
+        $.getJSON("https://feeds.delicious.com/v2/json/msoap?callback=?", {
         }, function(delicious_data) {
 
             var vars = {
                 name: 'Last delicious links:',
-                link_to_all: 'http://delicious.com/msoap',
+                link_to_all: 'https://delicious.com/msoap',
                 items: delicious_data.map(function(i) {
                     return {
                         title: i.d,
@@ -159,7 +158,7 @@ var App = {
 
     on_init_render_lastfm: function() {
         // http://www.lastfm.ru/api/show/user.getRecentTracks
-        $.getJSON("http://ws.audioscrobbler.com/2.0/?callback=?", {
+        $.getJSON("https://ws.audioscrobbler.com/2.0/?callback=?", {
             "method": "user.getRecentTracks",
             "format": "json",
             "user": "msoap",
@@ -184,44 +183,12 @@ var App = {
         });
     },
 
-    on_init_render_fotkiyandexru: function() {
-        // http://api.yandex.ru/fotki/doc/operations-ref/all-photos-collection-get.xml
-        $.getJSON("http://api-fotki.yandex.ru/api/users/msoap/photos/?callback=?", {
-            "limit": 10,
-            "format": "json"
-        }, function(yaphotki_data) {
-
-            var vars = {
-                without_url: true,
-                name: 'Last photos:',
-                link_to_all: 'http://fotki.yandex.ru/users/msoap/',
-                items: yaphotki_data.entries.filter(function(e, i) {
-                    return i < 15 ? true : false;
-                }).map(function(i) {
-                    return {
-                        title: i.title,
-                        description: i.description,
-                        url: i.links.alternate,
-                        date: new Date(i.published).toLocaleDateString()
-                    };
-               })
-            };
-
-            App.render_any('div#fotkiyandexru', vars);
-        });
-    },
-
     on_init_render_linkedin: function() {
         // add Linkedin button
         $('div#linkedin_div').append(
-            '<script src="http://platform.linkedin.com/in.js" type="text/javascript"></script>' +
-            '<script type="IN/MemberProfile" data-id="http://www.linkedin.com/in/mudrik" data-format="click" data-related="false"></script>'
+            '<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>' +
+            '<script type="IN/MemberProfile" data-id="https://www.linkedin.com/in/mudrik" data-format="hover" data-related="false" data-text="Sergey Mudrik"></script>'
         );
-
-        $("div#linkedin_div").one("mouseenter mouseleave", function() {
-            $("span.IN-widget a.li-connect-link").append('<span style="color: black; font-size: 70%; text-decoration: none;">Linkedin<span>');
-            $(this).unbind('mouseenter mouseleave');
-        });
     },
 
     // -------- render any block ---------
