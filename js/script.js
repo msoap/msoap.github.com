@@ -136,7 +136,7 @@ var App = {
 
     on_init_render_delicious: function() {
         // http://delicious.com/developers
-        $.getJSON("https://feeds.delicious.com/v2/json/msoap?callback=?", {
+        $.getJSON("http://feeds.delicious.com/v2/json/msoap?callback=?", {
         }, function(delicious_data) {
 
             var vars = {
@@ -162,7 +162,8 @@ var App = {
             "method": "user.getRecentTracks",
             "format": "json",
             "user": "msoap",
-            "api_key": "f013c46eeee32be481c90eb2c79378c5"
+            "api_key": "f013c46eeee32be481c90eb2c79378c5",
+            "limit": 15
         }, function(lastfm_data) {
 
             var vars = {
