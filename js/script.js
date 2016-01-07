@@ -13,7 +13,7 @@ var App = {
 
         // render
         App.on_init_render_github();
-        App.on_init_render_delicious();
+        // App.on_init_render_delicious();
         App.on_init_render_github_gists();
         App.on_init_render_lastfm();
         App.on_init_render_linkedin();
