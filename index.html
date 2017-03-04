@@ -30,9 +30,7 @@
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
               <li><a href="#github">github.com</a></li>
-              <!-- <li><a href="#delicious">del.icio.us</a></li> -->
               <li><a href="#lastfm">last.fm</a></li>
-              <li><a href="#linkedin">linked.in</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -53,20 +51,9 @@
             <h2>github.com</h2>
         </div>
 
-        <!-- <div id="delicious">
-            <a name="delicious"></a>
-            <h2>del.ucio.us</h2>
-        </div> -->
-
         <div id="lastfm">
             <a name="lastfm"></a>
             <h2>last.fm</h2>
-        </div>
-
-        <div id="linkedin">
-            <a name="linkedin"></a>
-            <h2>linked.in</h2>
-            <div id="linkedin_div"></div>
         </div>
 
     </div> <!-- /container -->
@@ -121,19 +108,33 @@
     </script>
 
 <!-- Yandex.Metrika counter -->
-<div style="display:none;"><script type="text/javascript">
-(function(w, c) {
-    (w[c] = w[c] || []).push(function() {
-        try {
-            w.yaCounter12947494 = new Ya.Metrika({id:12947494, enableAll: true});
-        }
-        catch(e) { }
-    });
-})(window, "yandex_metrika_callbacks");
-</script></div>
-<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script>
-<noscript><div><img src="//mc.yandex.ru/watch/12947494" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter43224729 = new Ya.Metrika({
+                    id:43224729,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    ut:"noindex"
+                });
+            } catch(e) { }
+        });
 
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/43224729?ut=noindex" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </body>
 </html>

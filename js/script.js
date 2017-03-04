@@ -13,10 +13,8 @@ var App = {
 
         // render
         App.on_init_render_github();
-        // App.on_init_render_delicious();
         App.on_init_render_github_gists();
         App.on_init_render_lastfm();
-        App.on_init_render_linkedin();
 
         // svg fallback
         if (! window.SVGSVGElement) {
@@ -134,28 +132,6 @@ var App = {
         });
     },
 
-    on_init_render_delicious: function() {
-        // http://delicious.com/developers
-        $.getJSON("http://feeds.delicious.com/v2/json/msoap?callback=?", {
-        }, function(delicious_data) {
-
-            var vars = {
-                name: 'Last delicious links:',
-                link_to_all: 'https://delicious.com/msoap',
-                items: delicious_data.map(function(i) {
-                    return {
-                        title: i.d,
-                        description: i.n,
-                        url: i.u,
-                        date: new Date(i.dt).toLocaleDateString()
-                    };
-                })
-            };
-
-            App.render_any('div#delicious', vars);
-        });
-    },
-
     on_init_render_lastfm: function() {
         // http://www.lastfm.ru/api/show/user.getRecentTracks
         $.getJSON("https://ws.audioscrobbler.com/2.0/?callback=?", {
@@ -182,14 +158,6 @@ var App = {
 
             App.render_any('div#lastfm', vars);
         });
-    },
-
-    on_init_render_linkedin: function() {
-        // add Linkedin button
-        $('div#linkedin_div').append(
-            '<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>' +
-            '<script type="IN/MemberProfile" data-id="https://www.linkedin.com/in/mudrik" data-format="hover" data-related="false" data-text="Sergey Mudrik"></script>'
-        );
     },
 
     // -------- render any block ---------
