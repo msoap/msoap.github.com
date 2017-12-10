@@ -27,6 +27,11 @@ var App = {
         if (year > 2000) {
             $('p#copyright').html("&copy; " + year);
         };
+
+        setTimeout(function() {
+            var im_counter = new Image();
+            im_counter.src = "https://msoap.space/user_counter"
+        }, 5000);
     },
 
     on_init_set_active: function() {
